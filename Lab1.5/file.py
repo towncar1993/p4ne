@@ -16,14 +16,17 @@ def parce(str):
     if re.search("^hostname ([a-zA-Z]+)", str):
         host_name=re.search("^hostname ([a-zA-Z]+)", str).group(1)
         return ("HOST", host_name)
-    return "UNCLASSIFIED"
+    return ("UNCLASSIFIED",)
 
 for file in f:
     with open(file) as curfile:
         for curline in curfile:
-            if parce(curline)[0] == "IP":mylist.append(parce(curline)[0]+" "+parce(curline)[1]+" "+parce(curline)[2])
-            if parce(curline)[0] == "INT":mylist.append(parce(curline)[0]+" "+parce(curline)[1])
-            if parce(curline)[0] == "HOST":mylist.append(parce(curline)[0]+" "+parce(curline)[1])
+            t = parce(curline)
+            if t[0] != "UNCLASSIFIED":
+                print(t)
+            #if parce(curline)[0] == "IP":mylist.append(parce(curline)[0]+" "+parce(curline)[1]+" "+parce(curline)[2])
+            #if parce(curline)[0] == "INT":mylist.append(parce(curline)[0]+" "+parce(curline)[1])
+            #if parce(curline)[0] == "HOST":mylist.append(parce(curline)[0]+" "+parce(curline)[1])
 
 #i=sorted(list(set(list(mylist))))
 
